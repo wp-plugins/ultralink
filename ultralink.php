@@ -6,7 +6,8 @@ Description: The Hyperlink, 2.0. Add rich context to your writing, create a bett
 Version: 0.9.2
 Author: Ultralink Inc.
 Author URI: http://ultralink.me
-License: ?
+License: Ultralink License
+License URI: https://ultralink.me/w/license.txt
 */
 
 //require_once('ultralink-actions.php'); //*
