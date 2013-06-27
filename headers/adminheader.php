@@ -12,7 +12,15 @@
 
     $dbPrefix = $wpdb->prefix;
     if( !empty($networkAdmin) ){ $dbPrefix = "wp_ms_"; }
-    else if( $wpdb->get_var( "SELECT useMultisiteDatabase FROM `" . $wpdb->prefix . "ultralink_config`" ) == '1' ){ $dbPrefix = "wp_ms_"; $useMultisiteDatabase = "checked"; }
+    else
+    {
+        $wpdb->query( "SHOW tables LIKE '" . $wpdb->prefix . "ultralink_config'" );
+
+        if( $wpdb->num_rows > 0 )
+        {
+            if( $wpdb->get_var( "SELECT useMultisiteDatabase FROM `" . $wpdb->prefix . "ultralink_config`" ) == '1' ){ $dbPrefix = "wp_ms_"; $useMultisiteDatabase = "checked"; }
+        }
+    }
 
     function typeOptions($selectedOption)
     {
