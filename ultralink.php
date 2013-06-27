@@ -3,15 +3,17 @@
 Plugin Name: Ultralink
 Plugin URI: https://ultralink.me
 Description: The Hyperlink, 2.0. Add rich context to your writing, create a better experience for your readers and make more revenue doing it.
-Version: 0.9.2
+Version: 0.9.3.2
 Author: Ultralink Inc.
 Author URI: http://ultralink.me
-License: ?
+License: Ultralink License
+License URI: https://ultralink.me/w/license.txt
 */
 
 //require_once('ultralink-actions.php'); //*
+require_once('headers/globals.php'); //*
 
-global $ultralink_db_version;     $ultralink_db_version = "0.9.2";
+global $ultralink_db_version;     $ultralink_db_version = "0.9.3";
 
 global $calloutType;              $calloutType = 'none';
 global $previewRebuild;           $previewRebuild = 'no';
@@ -21,7 +23,14 @@ global $plinkOverride;            $plinkOverride = '';
 global $wpdb;         //*
 $wpdb->show_errors(); //*
 
-$dbPrefix = $wpdb->prefix; if( $wpdb->get_var( "SELECT useMultisiteDatabase FROM `" . $wpdb->prefix . "ultralink_config`" ) == '1' ){ $dbPrefix = "wp_ms_"; }
+$dbPrefix = $wpdb->prefix;
+
+$wpdb->query( "SHOW tables LIKE '" . $wpdb->prefix . "ultralink_config'" );
+
+if( $wpdb->num_rows > 0 )
+{
+    if( $wpdb->get_var( "SELECT useMultisiteDatabase FROM `" . $wpdb->prefix . "ultralink_config`" ) == '1' ){ $dbPrefix = "wp_ms_"; }
+}
 
 class Ultralink
 {
@@ -123,11 +132,11 @@ class Ultralink
                  if( $options->defaultSearch == 'google' ){ $searchURL = "http://www.google.com/search?q="; }
             else if( $options->defaultSearch ==   'bing' ){ $searchURL = "http://www.bing.com/search?q=";   }
                                                       else{ $searchURL = "http://www.google.com/search?q="; }
-        }
-        
-		$imagesURL = plugin_dir_url( __FILE__ ) . "ultralinkImages/";
-		
-        echo "<script type='text/javascript'>Ultralink.startUltralink( { $databaseOption 'environment':'wordpress', 'scanFirst':'$scanFirst', 'sectionSelector':'div.entry-content', 'associatedWebsite':'" . site_url() .  "', 'combineLikeButtons':'$combineSimilarButtons', 'seperateSearch':'$multipleSearchOptions', 'newWindows':'$linksMakeNewWindows', 'proximityFade':'$mouseProximityFade', 'hoverTime':'$hoverTime', 'hoverRecoverTime':'$popupRecoveryTime', 'addSearch':'$addSearch', 'searchURL':'$searchURL', 'imagesURL':'$imagesURL', 'inlinePopups':'true', 'UMAnalytics':'$UMAnalytics'$adminOptions, 'iconSide' : 'right', 'buyamazon_affiliateInfo' : '$amazonAffiliateTag', 'buylinkshareapple_affiliateInfo' : '$linkshareID', 'buyebay_affiliateInfo' : '$ebayCampaign'  } );</script>";
+
+            $imagesURL = plugin_dir_url( __FILE__ ) . "ultralinkImages/";
+            
+            echo "<script type='text/javascript'>Ultralink.startUltralink( { $databaseOption 'environment':'wordpress', 'scanFirst':'$scanFirst', 'sectionSelector':'div.entry-content', 'associatedWebsite':'" . site_url() .  "', 'combineLikeButtons':'$combineSimilarButtons', 'seperateSearch':'$multipleSearchOptions', 'newWindows':'$linksMakeNewWindows', 'proximityFade':'$mouseProximityFade', 'hoverTime':'$hoverTime', 'hoverRecoverTime':'$popupRecoveryTime', 'addSearch':'$addSearch', 'searchURL':'$searchURL', 'imagesURL':'$imagesURL', 'inlinePopups':'true', 'UMAnalytics':'$UMAnalytics'$adminOptions, 'iconSide' : 'right', 'buyamazon_affiliateInfo' : '$amazonAffiliateTag', 'buylinkshareapple_affiliateInfo' : '$linkshareID', 'buyebay_affiliateInfo' : '$ebayCampaign'  } );</script>";
+        }        
 	}
 
     function injectPostAdminJavascriptLibraries()
@@ -505,7 +514,15 @@ function saveSettings()
 
     $dbPrefix = $wpdb->prefix;
     if( !empty($_POST['networkAdmin']) ){ $dbPrefix = "wp_ms_"; }
-    else if( $wpdb->get_var( "SELECT useMultisiteDatabase FROM `" . $wpdb->prefix . "ultralink_config`" ) ){ $dbPrefix = "wp_ms_"; }
+    else
+    {
+        $wpdb->query( "SHOW tables LIKE '" . $wpdb->prefix . "ultralink_config'" );
+
+        if( $wpdb->num_rows > 0 )
+        {
+            if( $wpdb->get_var( "SELECT useMultisiteDatabase FROM `" . $wpdb->prefix . "ultralink_config`" ) ){ $dbPrefix = "wp_ms_"; }
+        }
+    }
     
     $enabled               = 0; if( $_POST['ultralink_ultralinkEnabled']      == 'true' ){ $enabled               = 1; }
     $alwaysSearch          = 0; if( $_POST['ultralink_alwaysSearch']          == 'true' ){ $alwaysSearch          = 1; }
@@ -533,7 +550,6 @@ function saveSettings()
     
     $amazonAffiliateTag = $wpdb->escape($_POST['ultralink_amazonAffiliateTag']);
     $linkshareID = $wpdb->escape($_POST['ultralink_linkshareID']);
-//        $ebayPublisherID = $wpdb->escape($_POST['ultralink_ebayPublisherID']);
     $ebayCampaign = $wpdb->escape($_POST['ultralink_ebayCampaign']);
 
 //        $wpdb->query("DELETE FROM " . $dbPrefix . "ultralink_config");

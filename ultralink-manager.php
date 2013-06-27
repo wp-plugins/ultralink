@@ -44,7 +44,7 @@
     <script type="text/javascript">
         jQuery("ul.tabs").tabs("div.panes > div");
 		
-//        var pane = '<?php echo $_GET['pane']; ?>';
+//        var pane = '<?php /*echo $_GET['pane'];*/ ?>';
         
 //        if( pane )
 //        {
