@@ -3,7 +3,7 @@
 Plugin Name: Ultralink
 Plugin URI: https://ultralink.me
 Description: The Hyperlink, 2.0. Add rich context to your writing, create a better experience for your readers and make more revenue doing it.
-Version: 0.9.3.1
+Version: 0.9.3.2
 Author: Ultralink Inc.
 Author URI: http://ultralink.me
 License: Ultralink License
@@ -132,11 +132,11 @@ class Ultralink
                  if( $options->defaultSearch == 'google' ){ $searchURL = "http://www.google.com/search?q="; }
             else if( $options->defaultSearch ==   'bing' ){ $searchURL = "http://www.bing.com/search?q=";   }
                                                       else{ $searchURL = "http://www.google.com/search?q="; }
-        }
-        
-		$imagesURL = plugin_dir_url( __FILE__ ) . "ultralinkImages/";
-		
-        echo "<script type='text/javascript'>Ultralink.startUltralink( { $databaseOption 'environment':'wordpress', 'scanFirst':'$scanFirst', 'sectionSelector':'div.entry-content', 'associatedWebsite':'" . site_url() .  "', 'combineLikeButtons':'$combineSimilarButtons', 'seperateSearch':'$multipleSearchOptions', 'newWindows':'$linksMakeNewWindows', 'proximityFade':'$mouseProximityFade', 'hoverTime':'$hoverTime', 'hoverRecoverTime':'$popupRecoveryTime', 'addSearch':'$addSearch', 'searchURL':'$searchURL', 'imagesURL':'$imagesURL', 'inlinePopups':'true', 'UMAnalytics':'$UMAnalytics'$adminOptions, 'iconSide' : 'right', 'buyamazon_affiliateInfo' : '$amazonAffiliateTag', 'buylinkshareapple_affiliateInfo' : '$linkshareID', 'buyebay_affiliateInfo' : '$ebayCampaign'  } );</script>";
+
+            $imagesURL = plugin_dir_url( __FILE__ ) . "ultralinkImages/";
+            
+            echo "<script type='text/javascript'>Ultralink.startUltralink( { $databaseOption 'environment':'wordpress', 'scanFirst':'$scanFirst', 'sectionSelector':'div.entry-content', 'associatedWebsite':'" . site_url() .  "', 'combineLikeButtons':'$combineSimilarButtons', 'seperateSearch':'$multipleSearchOptions', 'newWindows':'$linksMakeNewWindows', 'proximityFade':'$mouseProximityFade', 'hoverTime':'$hoverTime', 'hoverRecoverTime':'$popupRecoveryTime', 'addSearch':'$addSearch', 'searchURL':'$searchURL', 'imagesURL':'$imagesURL', 'inlinePopups':'true', 'UMAnalytics':'$UMAnalytics'$adminOptions, 'iconSide' : 'right', 'buyamazon_affiliateInfo' : '$amazonAffiliateTag', 'buylinkshareapple_affiliateInfo' : '$linkshareID', 'buyebay_affiliateInfo' : '$ebayCampaign'  } );</script>";
+        }        
 	}
 
     function injectPostAdminJavascriptLibraries()
@@ -550,7 +550,6 @@ function saveSettings()
     
     $amazonAffiliateTag = $wpdb->escape($_POST['ultralink_amazonAffiliateTag']);
     $linkshareID = $wpdb->escape($_POST['ultralink_linkshareID']);
-//        $ebayPublisherID = $wpdb->escape($_POST['ultralink_ebayPublisherID']);
     $ebayCampaign = $wpdb->escape($_POST['ultralink_ebayCampaign']);
 
 //        $wpdb->query("DELETE FROM " . $dbPrefix . "ultralink_config");

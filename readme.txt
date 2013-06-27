@@ -4,7 +4,7 @@ Donate link: https://ultralink.me
 Tags: links, hyperlink, context, rich, affiliate, referral, popup
 Requires at least: 3.0
 Tested up to: 3.5.1
-Stable tag: 0.9.3.1
+Stable tag: 0.9.3.2
 License: Ultralink License
 License URI: https://ultralink.me/w/license.txt
 
