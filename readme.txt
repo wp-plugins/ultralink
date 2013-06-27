@@ -4,7 +4,7 @@ Donate link: https://ultralink.me
 Tags: links, hyperlink, context, rich, affiliate, referral, popup
 Requires at least: 3.0
 Tested up to: 3.5.1
-Stable tag: 0.9.3
+Stable tag: 0.9.3.1
 License: Ultralink License
 License URI: https://ultralink.me/w/license.txt
 
@@ -47,11 +47,14 @@ An 'Ultralink' menu will be added to the sidebar through which you can configure
 
 == Changelog ==
 
-Initial public version.
+Improved the way page content is analyzed. 
+Updated Twitter API interfaces to use version 1.1. 
+Most javascript files are now minified with the Closure compiler. 
+General cleanup, bug fixes, security fixes and size conscious modifications. 
 
 == Upgrade Notice ==
 
-Initial public version.
+No known upgrading issues. 
 
 == Screenshots ==
 
