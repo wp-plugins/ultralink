@@ -27,7 +27,6 @@
     {
         var oldAmazonTag = amazonAffiliateTag;
         var oldLinkshareID = linkshareID;
-//            var oldEbayPublisherID = ebayPublisherID;
         var oldEbayCampaign = ebayCampaign;
     
         jQuery('#ultralink_Settings').hide();
@@ -35,7 +34,6 @@
 
         amazonAffiliateTag = document.getElementById('ultralink_amazonAffiliateTag').value;
         linkshareID = document.getElementById('ultralink_linkshareID').value;
-//            ebayPublisherID = document.getElementById('ultralink_ebayPublisherID').value;
         ebayCampaign = document.getElementById('ultralink_ebayCampaign').value;
         
         ultralinkMeEmail    = document.getElementById('ultralinkMeEmail').value;
@@ -63,7 +61,6 @@
 
         settingsString += "&ultralink_amazonAffiliateTag=" + encodeURIComponent(amazonAffiliateTag);
         settingsString += "&ultralink_linkshareID=" + encodeURIComponent(linkshareID);
-//            settingsString += "&ultralink_ebayPublisherID=" + encodeURIComponent(ebayPublisherID);
         settingsString += "&ultralink_ebayCampaign=" + encodeURIComponent(ebayCampaign);
         settingsString += "&ultralink_mergeUltralinkMeLinks=" + document.getElementById('ultralink_mergeUltralinkMeLinks').checked;
         settingsString += "&ultralink_ultralinkMeAnalytics=" + document.getElementById('ultralink_ultralinkMeAnalytics').checked;
@@ -74,22 +71,6 @@
             if( xhrCall.status == 200 )
             {
                 console.log(xhrCall.responseText);
-                
-//                if( oldAmazonTag != amazonAffiliateTag ) //*
-//                {
-//                    APICall( localAPI + "rebuildAffiliateLinks.php", "&ultralink_link_type=" + "buyamazon" + "&ultralink_old_info=" + oldAmazonTag, function( xhrCall ){ console.log(xhrCall.responseText); } );
-//                }
-//                
-//                if( oldLinkshareID != linkshareID )
-//                {
-//                    APICall( localAPI + "rebuildAffiliateLinks.php", "&ultralink_link_type=" + "buylinkshareapple" + "&ultralink_old_info=" + oldLinkshareID, function( xhrCall ){ console.log(xhrCall.responseText); } );
-//                }
-//
-////                        if( oldEbayPublisherID != ebayPublisherID )
-//                if( oldEbayCampaign != ebayCampaign )
-//                {
-//                    APICall( localAPI + "rebuildAffiliateLinks.php", "&ultralink_link_type=" + "buyebay" + "&ultralink_old_info=" + oldEbayCampaign, function( xhrCall ){ console.log(xhrCall.responseText); } );
-//                }
             }
             else
             {
@@ -442,7 +423,7 @@
             </div>
         </div>
         <br>
-        <div id="multisiteToggle" style="display: <?php if( ($isMultisite == 0) || !empty($networkAdmin) ){ echo 'none'; } ?>; font-size: 1.3em; margin-left: 40px;"><input id='ultralink_useMultisiteDatabase' type='checkbox' <?php if( $useMultisiteDatabase  == "checked"){ echo "checked=\"checked\""; } ?> value='Yes' onclick='toggleMultiSite()' /> Use Multi-Site Settings</div>
+        <div id="multisiteToggle" style="display: <?php if( ($isMultisite == 0) || ((!empty($networkAdmin)) && ($networkAdmin == 'true')) ){ echo 'none'; } ?>; font-size: 1.3em; margin-left: 40px;"><input id='ultralink_useMultisiteDatabase' type='checkbox' <?php if( $useMultisiteDatabase  == "checked"){ echo "checked=\"checked\""; } ?> value='Yes' onclick='toggleMultiSite()' /> Use Multi-Site Settings</div>
         <!-- <div id='sourceToggle' style="width: 500px; display: <?php if( $useMultisiteDatabase == 'checked' ){ echo 'none'; } ?>;"> -->
         <div id='sourceToggle' style="width: 500px; display: none;">
             <center>
