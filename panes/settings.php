@@ -23,11 +23,10 @@
         return (get_as_float) ? now : (Math.round((now - s) * 1000) / 1000) + ' ' + s;
     }
     
-    function updateSettings()
+    function updateUltralinkSettings()
     {
         var oldAmazonTag = amazonAffiliateTag;
         var oldLinkshareID = linkshareID;
-//            var oldEbayPublisherID = ebayPublisherID;
         var oldEbayCampaign = ebayCampaign;
     
         jQuery('#ultralink_Settings').hide();
@@ -35,7 +34,6 @@
 
         amazonAffiliateTag = document.getElementById('ultralink_amazonAffiliateTag').value;
         linkshareID = document.getElementById('ultralink_linkshareID').value;
-//            ebayPublisherID = document.getElementById('ultralink_ebayPublisherID').value;
         ebayCampaign = document.getElementById('ultralink_ebayCampaign').value;
         
         ultralinkMeEmail    = document.getElementById('ultralinkMeEmail').value;
@@ -63,7 +61,6 @@
 
         settingsString += "&ultralink_amazonAffiliateTag=" + encodeURIComponent(amazonAffiliateTag);
         settingsString += "&ultralink_linkshareID=" + encodeURIComponent(linkshareID);
-//            settingsString += "&ultralink_ebayPublisherID=" + encodeURIComponent(ebayPublisherID);
         settingsString += "&ultralink_ebayCampaign=" + encodeURIComponent(ebayCampaign);
         settingsString += "&ultralink_mergeUltralinkMeLinks=" + document.getElementById('ultralink_mergeUltralinkMeLinks').checked;
         settingsString += "&ultralink_ultralinkMeAnalytics=" + document.getElementById('ultralink_ultralinkMeAnalytics').checked;
@@ -74,22 +71,6 @@
             if( xhrCall.status == 200 )
             {
                 console.log(xhrCall.responseText);
-                
-//                if( oldAmazonTag != amazonAffiliateTag ) //*
-//                {
-//                    APICall( localAPI + "rebuildAffiliateLinks.php", "&ultralink_link_type=" + "buyamazon" + "&ultralink_old_info=" + oldAmazonTag, function( xhrCall ){ console.log(xhrCall.responseText); } );
-//                }
-//                
-//                if( oldLinkshareID != linkshareID )
-//                {
-//                    APICall( localAPI + "rebuildAffiliateLinks.php", "&ultralink_link_type=" + "buylinkshareapple" + "&ultralink_old_info=" + oldLinkshareID, function( xhrCall ){ console.log(xhrCall.responseText); } );
-//                }
-//
-////                        if( oldEbayPublisherID != ebayPublisherID )
-//                if( oldEbayCampaign != ebayCampaign )
-//                {
-//                    APICall( localAPI + "rebuildAffiliateLinks.php", "&ultralink_link_type=" + "buyebay" + "&ultralink_old_info=" + oldEbayCampaign, function( xhrCall ){ console.log(xhrCall.responseText); } );
-//                }
             }
             else
             {
@@ -422,7 +403,7 @@
 		<br>
 		<div class="settingSection">
             <h2 style="margin-top: 4px;">Ultralink WordPress Plugin Beta Version <?php global $ultralink_version_string; echo $ultralink_version_string; ?></h2>
-            <div>
+            <div style='display: none;'>
                 <?php
                     global $ultralink_version;
                     
@@ -433,16 +414,16 @@
                     if( $useMultisiteDatabase == "checked" ){ $msDisplay = "none"; }
 
                          if( $ultralink_version == $latestAvailableVersion ){ echo "You are up-to-date."; }
-                    else if( $ultralink_version  < $latestAvailableVersion ){ echo "Newer version " . $latestAvailableVersionString . " is available. <input type='submit' onclick='upgradePlugin(\"$latestAvailableVersionString\")' value='Upgrade' style='display: " . $msDisplay . ";' />"; }
+                    else if( $ultralink_version  < $latestAvailableVersion ){ echo "Newer version " . $latestAvailableVersionString . " is available. <input type='button' onclick='upgradePlugin(\"$latestAvailableVersionString\")' value='Upgrade' style='display: " . $msDisplay . ";' />"; }
                     else if( $ultralink_version  > $latestAvailableVersion ){ echo "You are running an unreleased version."; }
                 ?>
             </div>
             <div style="display: none;">
-                <input type='submit' onclick='checkForUpdates()' value='Check For Updates' />
+                <input type='button' onclick='checkForUpdates()' value='Check For Updates' />
             </div>
         </div>
         <br>
-        <div id="multisiteToggle" style="display: <?php if( ($isMultisite == 0) || !empty($networkAdmin) ){ echo 'none'; } ?>; font-size: 1.3em; margin-left: 40px;"><input id='ultralink_useMultisiteDatabase' type='checkbox' <?php if( $useMultisiteDatabase  == "checked"){ echo "checked=\"checked\""; } ?> value='Yes' onclick='toggleMultiSite()' /> Use Multi-Site Settings</div>
+        <div id="multisiteToggle" style="display: <?php if( ($isMultisite == 0) || ((!empty($networkAdmin)) && ($networkAdmin == 'true')) ){ echo 'none'; } ?>; font-size: 1.3em; margin-left: 40px;"><input id='ultralink_useMultisiteDatabase' type='checkbox' <?php if( $useMultisiteDatabase  == "checked"){ echo "checked=\"checked\""; } ?> value='Yes' onclick='toggleMultiSite()' /> Use Multi-Site Settings</div>
         <!-- <div id='sourceToggle' style="width: 500px; display: <?php if( $useMultisiteDatabase == 'checked' ){ echo 'none'; } ?>;"> -->
         <div id='sourceToggle' style="width: 500px; display: none;">
             <center>
@@ -459,8 +440,8 @@
                 </div>
                 <div id="connected_Account" style="display: none;">
                     <table>
-                        <tr><td><img src="<?php echo plugin_dir_url( __FILE__ ) . '../images/logo16.png'; ?>" /></td><td valign="middle"><big><b id="connected_Account_email">Connected Account: </b></big></td><td><input type='submit' onclick="disconnectUltralinkMe()" value="Disconnect" /></td></tr>
-                        <tr id="syncButtons"><td colspan='3' align="center"><b id="connected_Account_lastSync">Last Sync: </b> <input type='submit' onclick="updateUltralinkMe('ultralink_sync')" value="Sync Now" /> <input type='submit' onclick="updateUltralinkMe('ultralink_initial_scan')" value="Complete Re-Sync" /></td></tr>
+                        <tr><td><img src="<?php echo plugin_dir_url( __FILE__ ) . '../images/logo16.png'; ?>" /></td><td valign="middle"><big><b id="connected_Account_email">Connected Account: </b></big></td><td><input type='button' onclick="disconnectUltralinkMe()" value="Disconnect" /></td></tr>
+                        <tr id="syncButtons"><td colspan='3' align="center"><b id="connected_Account_lastSync">Last Sync: </b> <input type='button' onclick="updateUltralinkMe('ultralink_sync')" value="Sync Now" /> <input type='button' onclick="updateUltralinkMe('ultralink_initial_scan')" value="Complete Re-Sync" /></td></tr>
                         <tr id="syncProgress" style="display: none;"><td colspan='3' align="center"><table><tr><td><img src="<?php echo plugin_dir_url( __FILE__ ) . '../images/loading.gif'; ?>" /></td><td valign="middle"><big><b>Syncing with ultralink.me ...</b></big><br><small>(This can take a couple of minutes)</small><br></td></tr></table></td></tr>
                     </table>
                 </div>
@@ -471,7 +452,7 @@
                     <tr><td width="130">Email:</td><td><input id='ultralinkMeEmail' size='40' type='text' value='<?php echo $ultralinkMeEmail; ?>' /></td></tr>
                     <tr><td>Password:</td><td><input id='ultralinkMePassword' size='40' type='password' onkeydown="if( event.keyCode == 13 ){ connectUltralinkMe(); }" /></td></tr>
                     </table>
-                    <center><input type='submit' onclick="connectUltralinkMe()" value="Connect" style='margin-top: 10px;' /></center>
+                    <center><input type='button' onclick="connectUltralinkMe()" value="Connect" style='margin-top: 10px;' /></center>
                 </div>
             </div>
             <br>
@@ -519,7 +500,7 @@
                 <div id="ultralinkmeSyncSettings">
                     <h2 style="margin-top: 10px;">ultralink.me Interaction</h2>
                     <table>
-                    <tr><td><input id='ultralink_mergeUltralinkMeLinks' type='checkbox' <?php if( $mergeUltralinkMeLinks == "checked" ){ echo "checked=\"checked\""; } ?> value='Yes' /> Merge with identical Ultralinks from ultralink.me</td><td style="display: none;"><input type='submit' onclick="mergeIdenticalLinksNow()" value="Merge Now" /></td></tr>
+                    <tr><td><input id='ultralink_mergeUltralinkMeLinks' type='checkbox' <?php if( $mergeUltralinkMeLinks == "checked" ){ echo "checked=\"checked\""; } ?> value='Yes' /> Merge with identical Ultralinks from ultralink.me</td><td style="display: none;"><input type='button' onclick="mergeIdenticalLinksNow()" value="Merge Now" /></td></tr>
                     <tr><td><input id='ultralink_ultralinkMeAnalytics'  type='checkbox' <?php if(  $ultralinkMeAnalytics == "checked" ){ echo "checked=\"checked\""; } ?> value='Yes' /> Record analytics data</td></tr>
                     </table>
                 </div>
@@ -532,7 +513,7 @@
                 </div>
                 
                 <br>
-                <center><input type='submit' onclick="updateSettings()" value="Update Settings" /></center>
+                <center><input type='button' onclick="updateUltralinkSettings()" value="Update Settings" /></center>
             </div>
         </div>
     </div>
