@@ -423,7 +423,7 @@
             </div>
         </div>
         <br>
-        <div id="multisiteToggle" style="display: <?php if( ($isMultisite == 0) || !empty($networkAdmin) ){ echo 'none'; } ?>; font-size: 1.3em; margin-left: 40px;"><input id='ultralink_useMultisiteDatabase' type='checkbox' <?php if( $useMultisiteDatabase  == "checked"){ echo "checked=\"checked\""; } ?> value='Yes' onclick='toggleMultiSite()' /> Use Multi-Site Settings</div>
+        <div id="multisiteToggle" style="display: <?php if( ($isMultisite == 0) || ((!empty($networkAdmin)) && ($networkAdmin == 'true')) ){ echo 'none'; } ?>; font-size: 1.3em; margin-left: 40px;"><input id='ultralink_useMultisiteDatabase' type='checkbox' <?php if( $useMultisiteDatabase  == "checked"){ echo "checked=\"checked\""; } ?> value='Yes' onclick='toggleMultiSite()' /> Use Multi-Site Settings</div>
         <!-- <div id='sourceToggle' style="width: 500px; display: <?php if( $useMultisiteDatabase == 'checked' ){ echo 'none'; } ?>;"> -->
         <div id='sourceToggle' style="width: 500px; display: none;">
             <center>

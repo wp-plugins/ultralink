@@ -9,7 +9,7 @@
 
     <link rel="stylesheet" href="<?php echo plugin_dir_url( __FILE__ ) . 'images/tabs.css'; ?>" type="text/css" media="screen" />
 
-    <h1>Ultralink <span style='display: <?php if( empty($networkAdmin) ){ echo "none"; } ?>;'>(Multi-Site Settings)</span><span style='display: <?php if( $useMultisiteDatabase == "unchecked" ){ echo "none"; } ?>;'>(Using Multi-Site Settings)</span></h1>
+    <h1>Ultralink <span style='display: <?php if( empty($networkAdmin) || ((!empty($networkAdmin)) && ($networkAdmin == "false")) ){ echo "none"; } ?>;'>(Multi-Site Settings)</span><span style='display: <?php if( $useMultisiteDatabase == "unchecked" ){ echo "none"; } ?>;'>(Using Multi-Site Settings)</span></h1>
 
     <ul class="tabs" id="managerTabs">
         <li id='contentTab'><a href="#content">Content</a></li>

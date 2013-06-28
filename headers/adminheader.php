@@ -11,7 +11,7 @@
     global $dbPrefix;
 
     $dbPrefix = $wpdb->prefix;
-    if( !empty($networkAdmin) ){ $dbPrefix = "wp_ms_"; }
+    if( !empty($networkAdmin) && ($networkAdmin == 'true') ){ $dbPrefix = "wp_ms_"; }
     else
     {
         $networkAdmin = 'false';

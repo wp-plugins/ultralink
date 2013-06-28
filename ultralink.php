@@ -3,7 +3,7 @@
 Plugin Name: Ultralink
 Plugin URI: https://ultralink.me
 Description: The Hyperlink, 2.0. Add rich context to your writing, create a better experience for your readers and make more revenue doing it.
-Version: 0.9.3.2
+Version: 0.9.3.3
 Author: Ultralink Inc.
 Author URI: http://ultralink.me
 License: Ultralink License
@@ -513,14 +513,14 @@ function saveSettings()
     global $wpdb;
 
     $dbPrefix = $wpdb->prefix;
-    if( !empty($_POST['networkAdmin']) ){ $dbPrefix = "wp_ms_"; }
+    if( (!empty($_POST['networkAdmin'])) && ($_POST['networkAdmin'] == 'true') ){ $dbPrefix = "wp_ms_"; }
     else
     {
         $wpdb->query( "SHOW tables LIKE '" . $wpdb->prefix . "ultralink_config'" );
 
         if( $wpdb->num_rows > 0 )
         {
-            if( $wpdb->get_var( "SELECT useMultisiteDatabase FROM `" . $wpdb->prefix . "ultralink_config`" ) ){ $dbPrefix = "wp_ms_"; }
+            if( $wpdb->get_var( "SELECT useMultisiteDatabase FROM `" . $wpdb->prefix . "ultralink_config`" ) == '1' ){ $dbPrefix = "wp_ms_"; }
         }
     }
     
