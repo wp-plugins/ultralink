@@ -4,7 +4,7 @@ Donate link: https://ultralink.me
 Tags: links, hyperlink, context, rich, affiliate, referral, popup
 Requires at least: 3.0
 Tested up to: 3.5.2
-Stable tag: 0.9.3.4
+Stable tag: 0.9.4
 License: Ultralink License
 License URI: https://ultralink.me/w/license.txt
 
@@ -36,7 +36,7 @@ Learn about how the central [ultralink.me database](https://ultralink.me/w/umdat
 # **Monetization That Isn't Annoying**
 Ultralinks improve websites and the browsing experience by connecting web surfers with the information they want. Sometimes they might want to quickly and easily purchase a product or service they see. As the web site owner, you deserve your cut!
 
-If you have an affiliate account with Linkshare, Amazon or eBay, those link types are associated with your account. That means that you keep 100% of the commision from any sales.
+If you have an affiliate account with PHG, Linkshare, Amazon or eBay, those link types are associated with your account. That means that you keep 100% of the commision from any sales.
 
 Annoying ads or inline affiliate links are no longer the only ways to make money from your content. You can now monetize, without compromise, and keep your site beautiful. You can have your cake and eat it too.
 
@@ -47,10 +47,13 @@ An 'Ultralink' menu will be added to the sidebar through which you can configure
 
 == Changelog ==
 
-Improved the way page content is analyzed. 
-Updated Twitter API interfaces to use version 1.1. 
-Most javascript files are now minified with the Closure compiler. 
-General cleanup, bug fixes, security fixes and size conscious modifications. 
+Better Amazon and Google Play link detection. 
+CSS to prevent ultralink hyphenation in specific contexts. 
+Made Wikipedia inline popup API calls more fault tolerant. 
+Better page content detection routines. 
+Added YouTube user link support. 
+Changed the selector the plugin uses to slice up article content with a better one. 
+Support for PHG affiliate tags. 
 
 == Upgrade Notice ==
 

@@ -3,7 +3,7 @@
 Plugin Name: Ultralink
 Plugin URI: https://ultralink.me
 Description: The Hyperlink, 2.0. Add rich context to your writing, create a better experience for your readers and make more revenue doing it.
-Version: 0.9.3.4
+Version: 0.9.4
 Author: Ultralink Inc.
 Author URI: http://ultralink.me
 License: Ultralink License
@@ -13,7 +13,7 @@ License URI: https://ultralink.me/w/license.txt
 //require_once('ultralink-actions.php'); //*
 require_once('headers/globals.php'); //*
 
-global $ultralink_db_version;     $ultralink_db_version = "0.9.3";
+global $ultralink_db_version;     $ultralink_db_version = "0.9.4";
 
 global $calloutType;              $calloutType = 'none';
 global $previewRebuild;           $previewRebuild = 'no';
@@ -112,6 +112,7 @@ class Ultralink
 
             $amazonAffiliateTag = $options->amazonAffiliateTag;
             $linkshareID        = $options->linkshareID;
+            $phgID              = $options->phgID;
             $ebayCampaign       = $options->ebayCampaign;
 
             if( $sourceType == 0 )
@@ -135,7 +136,7 @@ class Ultralink
 
             $imagesURL = plugin_dir_url( __FILE__ ) . "ultralinkImages/";
             
-            echo "<script type='text/javascript'>Ultralink.startUltralink( { $databaseOption 'environment':'wordpress', 'scanFirst':'$scanFirst', 'sectionSelector':'div.entry-content', 'associatedWebsite':'" . site_url() .  "', 'combineLikeButtons':'$combineSimilarButtons', 'seperateSearch':'$multipleSearchOptions', 'newWindows':'$linksMakeNewWindows', 'proximityFade':'$mouseProximityFade', 'hoverTime':'$hoverTime', 'hoverRecoverTime':'$popupRecoveryTime', 'addSearch':'$addSearch', 'searchURL':'$searchURL', 'imagesURL':'$imagesURL', 'inlinePopups':'true', 'UMAnalytics':'$UMAnalytics'$adminOptions, 'iconSide' : 'right', 'buyamazon_affiliateInfo' : '$amazonAffiliateTag', 'buylinkshareapple_affiliateInfo' : '$linkshareID', 'buyebay_affiliateInfo' : '$ebayCampaign'  } );</script>";
+            echo "<script type='text/javascript'>Ultralink.startUltralink( { $databaseOption 'environment':'wordpress', 'scanFirst':'$scanFirst', 'sectionSelector':'div.entry-content, div.entry_content, div.post-entry', 'associatedWebsite':'" . site_url() .  "', 'combineLikeButtons':'$combineSimilarButtons', 'seperateSearch':'$multipleSearchOptions', 'newWindows':'$linksMakeNewWindows', 'proximityFade':'$mouseProximityFade', 'hoverTime':'$hoverTime', 'hoverRecoverTime':'$popupRecoveryTime', 'addSearch':'$addSearch', 'searchURL':'$searchURL', 'imagesURL':'$imagesURL', 'inlinePopups':'true', 'UMAnalytics':'$UMAnalytics'$adminOptions, 'iconSide' : 'right', 'buyamazon_affiliateInfo' : '$amazonAffiliateTag', 'buylinkshareapple_affiliateInfo' : '$linkshareID', 'buyapple_affiliateInfo' : '$phgID', 'buyebay_affiliateInfo' : '$ebayCampaign'  } );</script>";
         }        
 	}
 
@@ -367,6 +368,7 @@ class Ultralink
         useMultisiteDatabase boolean DEFAULT $multiSiteDefault,
         amazonAffiliateTag tinytext,
         linkshareID tinytext,
+        phgID tinytext,
         ebayCampaign tinytext,
         ultralinkMeEmail tinytext,
         ultralinkMeAPIKey tinytext,
@@ -549,13 +551,14 @@ function saveSettings()
 //    $useMultisiteDatabase  = 0; if( $_POST['ultralink_useMultisiteDatabase']  == 'true' ){ $useMultisiteDatabase  = 1; }
     
     $amazonAffiliateTag = $wpdb->escape($_POST['ultralink_amazonAffiliateTag']);
-    $linkshareID = $wpdb->escape($_POST['ultralink_linkshareID']);
-    $ebayCampaign = $wpdb->escape($_POST['ultralink_ebayCampaign']);
+    $linkshareID        = $wpdb->escape($_POST['ultralink_linkshareID']);
+    $phgID              = $wpdb->escape($_POST['ultralink_phgID']);
+    $ebayCampaign       = $wpdb->escape($_POST['ultralink_ebayCampaign']);
 
 //        $wpdb->query("DELETE FROM " . $dbPrefix . "ultralink_config");
 //        $wpdb->query("INSERT INTO " . $dbPrefix . "ultralink_config (ultralinkEnabled, alwaysSearch, defaultSearch, amazonAffiliateTag, linkshareID) VALUES('$enabled', '$alwaysSearch', '$defaultSearch', '$amazonAffiliateTag', '$linkshareID')");
 //    $wpdb->query("UPDATE " . $dbPrefix . "ultralink_config SET ultralinkEnabled='$enabled', alwaysSearch='$alwaysSearch', combineSimilarButtons='$combineSimilarButtons', multipleSearchOptions='$multipleSearchOptions', linksMakeNewWindows='$linksMakeNewWindows', mouseProximityFade='$mouseProximityFade', hasHoverTime='$hasHoverTime', hasPopupRecoveryTime='$hasPopupRecoveryTime', hoverTime='$hoverTime', popupRecoveryTime='$popupRecoveryTime', defaultSearch='$defaultSearch', useMultisiteDatabase='$useMultisiteDatabase', amazonAffiliateTag='$amazonAffiliateTag', linkshareID='$linkshareID', ebayCampaign='$ebayCampaign', mergeUltralinkMeLinks='$mergeLinks', ultralinkMeAnalytics='$analytics' WHERE 1");
-    $wpdb->query("UPDATE " . $dbPrefix . "ultralink_config SET ultralinkEnabled='$enabled', alwaysSearch='$alwaysSearch', combineSimilarButtons='$combineSimilarButtons', multipleSearchOptions='$multipleSearchOptions', linksMakeNewWindows='$linksMakeNewWindows', mouseProximityFade='$mouseProximityFade', hasHoverTime='$hasHoverTime', hasPopupRecoveryTime='$hasPopupRecoveryTime', hoverTime='$hoverTime', popupRecoveryTime='$popupRecoveryTime', defaultSearch='$defaultSearch', amazonAffiliateTag='$amazonAffiliateTag', linkshareID='$linkshareID', ebayCampaign='$ebayCampaign', mergeUltralinkMeLinks='$mergeLinks', ultralinkMeAnalytics='$analytics', source='$source' WHERE 1");
+    $wpdb->query("UPDATE " . $dbPrefix . "ultralink_config SET ultralinkEnabled='$enabled', alwaysSearch='$alwaysSearch', combineSimilarButtons='$combineSimilarButtons', multipleSearchOptions='$multipleSearchOptions', linksMakeNewWindows='$linksMakeNewWindows', mouseProximityFade='$mouseProximityFade', hasHoverTime='$hasHoverTime', hasPopupRecoveryTime='$hasPopupRecoveryTime', hoverTime='$hoverTime', popupRecoveryTime='$popupRecoveryTime', defaultSearch='$defaultSearch', amazonAffiliateTag='$amazonAffiliateTag', linkshareID='$linkshareID', phgID='$phgID', ebayCampaign='$ebayCampaign', mergeUltralinkMeLinks='$mergeLinks', ultralinkMeAnalytics='$analytics', source='$source' WHERE 1");
     
     // If WP Super Cache is installed then invalidate entire cache
 //            if( function_exists('wp_cache_clear_cache') ){ wp_cache_clear_cache(); }

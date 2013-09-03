@@ -25,16 +25,18 @@
     
     function updateUltralinkSettings()
     {
-        var oldAmazonTag = amazonAffiliateTag;
-        var oldLinkshareID = linkshareID;
+        var oldAmazonTag    = amazonAffiliateTag;
+        var oldLinkshareID  = linkshareID;
+        var oldPHGID        = phgID;
         var oldEbayCampaign = ebayCampaign;
     
         jQuery('#ultralink_Settings').hide();
         jQuery('#saving_Settings').show();
 
         amazonAffiliateTag = document.getElementById('ultralink_amazonAffiliateTag').value;
-        linkshareID = document.getElementById('ultralink_linkshareID').value;
-        ebayCampaign = document.getElementById('ultralink_ebayCampaign').value;
+        linkshareID        = document.getElementById('ultralink_linkshareID').value;
+        phgID              = document.getElementById('ultralink_phgID').value;
+        ebayCampaign       = document.getElementById('ultralink_ebayCampaign').value;
         
         ultralinkMeEmail    = document.getElementById('ultralinkMeEmail').value;
         ultralinkMePassword = document.getElementById('ultralinkMePassword').value;
@@ -61,6 +63,7 @@
 
         settingsString += "&ultralink_amazonAffiliateTag=" + encodeURIComponent(amazonAffiliateTag);
         settingsString += "&ultralink_linkshareID=" + encodeURIComponent(linkshareID);
+        settingsString += "&ultralink_phgID=" + encodeURIComponent(phgID);
         settingsString += "&ultralink_ebayCampaign=" + encodeURIComponent(ebayCampaign);
         settingsString += "&ultralink_mergeUltralinkMeLinks=" + document.getElementById('ultralink_mergeUltralinkMeLinks').checked;
         settingsString += "&ultralink_ultralinkMeAnalytics=" + document.getElementById('ultralink_ultralinkMeAnalytics').checked;
@@ -493,6 +496,7 @@
                     <table>
                     <tr><td width="130">Amazon Affiliate Tag:</td><td><input id='ultralink_amazonAffiliateTag' size='40' type='text' value='<?php echo $amazonAffiliateTag; ?>' /></td></tr>
                     <tr><td>Linkshare ID:</td><td><input id='ultralink_linkshareID' size='40' type='text' value='<?php echo $linkshareID; ?>' /></td></tr>
+                    <tr><td>PHG ID:</td><td><input id='ultralink_phgID' size='40' type='text' value='<?php echo $phgID; ?>' /></td></tr>
                     <tr><td>eBay Campaign:</td><td><input id='ultralink_ebayCampaign' size='40' type='text' value='<?php echo $ebayCampaign; ?>' /></td></tr>
                     </table>
                 </div>
