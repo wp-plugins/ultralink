@@ -8,6 +8,7 @@
                         "videoyoutube"      => "YouTube",
                         "buy"               => "Buy",
                         "buylinkshareapple" => "Buy From Apple",
+                        "buyapple"          => "Buy From Apple",
                         "buyamazon"         => "Buy From Amazon",
                         "buyebay"           => "Buy From Ebay",
                         "appios"            => "iOS App",

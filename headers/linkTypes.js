@@ -7,6 +7,7 @@ linkTypes["buy"]               = "Buy";
 linkTypes["video"]             = "Video";
 linkTypes["videoyoutube"]      = "YouTube";
 linkTypes["buylinkshareapple"] = "Buy From Apple";
+linkTypes["buyapple"]          = "Buy From Apple";
 linkTypes["buyamazon"]         = "Buy From Amazon";
 linkTypes["buyebay"]           = "Buy From Ebay";
 linkTypes["appios"]            = "iOS App";
