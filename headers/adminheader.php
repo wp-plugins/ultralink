@@ -82,13 +82,13 @@
 		}
 	}
     
-    $options = $wpdb->get_row("SELECT ultralinkEnabled, alwaysSearch, combineSimilarButtons, multipleSearchOptions, linksMakeNewWindows, mouseProximityFade, hasHoverTime, hasPopupRecoveryTime, hoverTime, popupRecoveryTime, defaultSearch, useMultisiteDatabase, amazonAffiliateTag, linkshareID, phgID, ebayCampaign, ultralinkEnabled, ultralinkMeEmail, ultralinkMeAPIKey, ultralinkMeWebsiteVerifier, UNIX_TIMESTAMP(ultralinkMeLastSync) AS ultralinkMeLastSync, mergeUltralinkMeLinks, ultralinkMeAnalytics, latestAvailableVersion, latestAvailableVersionString, sourceType, source FROM " . $dbPrefix . "ultralink_config");
+    $options = $wpdb->get_row("SELECT *, UNIX_TIMESTAMP(ultralinkMeLastSync) AS ultralinkMeLastSync FROM " . $dbPrefix . "ultralink_config");
     if( is_null($options) )
     {
         if( $wpdb->get_var("SELECT COUNT(*) FROM " . $dbPrefix . "ultralink_config") == 0 )
         {
             $wpdb->query("INSERT INTO " . $dbPrefix . "ultralink_config (defaultSearch) VALUES('google')");
-            $options = $wpdb->get_row("SELECT ultralinkEnabled, alwaysSearch, combineSimilarButtons, multipleSearchOptions, linksMakeNewWindows, mouseProximityFade, hasHoverTime, hasPopupRecoveryTime, hoverTime, popupRecoveryTime, defaultSearch, useMultisiteDatabase, amazonAffiliateTag, linkshareID, phgID, ebayCampaign, ultralinkEnabled, ultralinkMeEmail, ultralinkMeAPIKey, ultralinkMeWebsiteVerifier, UNIX_TIMESTAMP(ultralinkMeLastSync) AS ultralinkMeLastSync, mergeUltralinkMeLinks, ultralinkMeAnalytics, latestAvailableVersion, latestAvailableVersionString, sourceType, source FROM " . $dbPrefix . "ultralink_config");
+            $options = $wpdb->get_row("SELECT *, UNIX_TIMESTAMP(ultralinkMeLastSync) AS ultralinkMeLastSync FROM " . $dbPrefix . "ultralink_config");
         }
     }
     
