@@ -81,7 +81,21 @@
 			return date('F Y', $ts);
 		}
 	}
-    
+
+    $categoryWhitelist = "";
+    $categoryWhitelistResult = $wpdb->get_results("SELECT * FROM " . $dbPrefix . "ultralink_category_whitelist", ARRAY_A);
+    foreach( $categoryWhitelistResult as $categoryWhitelistEntry )
+    {
+        $categoryWhitelist .= $categoryWhitelistEntry['whitestring'] . "\n";
+    }
+
+    $categoryBlacklist = "";
+    $categoryBlacklistResult = $wpdb->get_results("SELECT * FROM " . $dbPrefix . "ultralink_category_blacklist", ARRAY_A);
+    foreach( $categoryBlacklistResult as $categoryBlacklistEntry )
+    {
+        $categoryBlacklist .= $categoryBlacklistEntry['blackstring'] . "\n";
+    }
+
     $options = $wpdb->get_row("SELECT *, UNIX_TIMESTAMP(ultralinkMeLastSync) AS ultralinkMeLastSync FROM " . $dbPrefix . "ultralink_config");
     if( is_null($options) )
     {

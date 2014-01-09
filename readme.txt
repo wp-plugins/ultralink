@@ -3,8 +3,8 @@ Contributors: spencer@ultralink.me
 Donate link: https://ultralink.me
 Tags: links, hyperlink, context, rich, affiliate, referral, popup
 Requires at least: 3.0
-Tested up to: 3.5.2
-Stable tag: 0.9.4
+Tested up to: 3.8
+Stable tag: 0.9.5
 License: Ultralink License
 License URI: https://ultralink.me/w/license.txt
 
@@ -47,17 +47,19 @@ An 'Ultralink' menu will be added to the sidebar through which you can configure
 
 == Changelog ==
 
-Better Amazon and Google Play link detection. 
-CSS to prevent ultralink hyphenation in specific contexts. 
-Made Wikipedia inline popup API calls more fault tolerant. 
-Better page content detection routines. 
-Added YouTube user link support. 
-Changed the selector the plugin uses to slice up article content with a better one. 
-Support for PHG affiliate tags. 
+Category-based whitelisting and blacklisting.
+Added new ESPN link type.
+Added new CrunchBase link type.
+Added new Vimeo link type.
+Newly fleshed out AngelList inline pane.
+Added a "More..." button to the Wikipedia inline pane.
+More scaleable infrastructure. 
+Tons of bug fixes. 
+Tons of performance enhancements.
 
 == Upgrade Notice ==
 
-No known upgrading issues. 
+No known upgrading issues.
 
 == Screenshots ==
 
