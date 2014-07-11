@@ -1,5 +1,6 @@
 var linkTypes = {
     'image':             "Image",
+    'pdf':               "PDF",
     'href':              "Link",
     'href2':             "Link 2",
     'href3':             "Link 3",
@@ -19,6 +20,7 @@ var linkTypes = {
     'github':            "GitHub",
     'imdb':              "IMDB Profile",
     'espn':              "ESPN Profile",
+    'webmd':             "WebMD",
     'manpage':           "Documentation",
     'twitter':           "Twitter",
     'linkedin':          "LinkedIn",
@@ -29,13 +31,17 @@ var linkTypes = {
     'freebase':          "Freebase",
     'angellist':         "AngelList",
     'crunchbase':        "CrunchBase",
+    'intelark':          "Intel ARK",
+    'comicvine':         "Comic Vine",
     'annotation':        "Annotation",
     'map':               "Map",
     'mapgoogle':         "Google Map",
     'search':            "Search",
     'searchgoogle':      "Google Search",
     'searchyahoo':       "Yahoo Search",
-    'searchbing':        "Bing Search"
+    'searchbing':        "Bing Search",
+    'searchpubmed':      "PubMed Search",
+    'searchul':          "Search Ultralinks"
 };
 
 var linkTypeCategories = {
@@ -44,10 +50,10 @@ var linkTypeCategories = {
     'App':        [ "appios", "appmac", "appwebos", "appandroid", "appwindows" ],
     'Buy':        [ "buy", "buylinkshareapple", "buyapple", "buyamazon", "buyebay" ],
     'Social':     [ "twitter", "linkedin", "googleplus", "facebook" ],
-    'Reference':  [ "wikipedia", "mediawiki", "imdb", "espn", "github", "freebase", "angellist", "crunchbase", "manpage", "map", "mapgoogle" ],
+    'Reference':  [ "wikipedia", "mediawiki", "imdb", "espn", "webmd", "github", "freebase", "angellist", "crunchbase", "manpage", "map", "mapgoogle", "intelark", "comicvine" ],
     'Video':      [ "video", "videoyoutube", "videovimeo" ],
     'Annotation': [ "annotation" ],
-    'Search':     [ "search", "searchgoogle", "searchyahoo", "searchbing" ]
+    'Search':     [ "searchul", "search", "searchgoogle", "searchyahoo", "searchbing", "searchpubmed" ]
 };
 
 var linkInlineDependencies = {
@@ -64,5 +70,9 @@ var linkInlineDependencies = {
     'facebook':     "facebook",
     'angellist':    "angellist",
     'crunchbase':   "ultralinkme",
-    'buyamazon':    "ultralinkme"
+    'buyamazon':    "ultralinkme",
+    'intelark':     "ultralinkme",
+    'comicvine':    "ultralinkme"
 };
+
+var customLinkTypes = {};

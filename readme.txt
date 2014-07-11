@@ -3,8 +3,8 @@ Contributors: spencer@ultralink.me
 Donate link: https://ultralink.me
 Tags: links, hyperlink, context, rich, affiliate, referral, popup
 Requires at least: 3.0
-Tested up to: 3.8
-Stable tag: 0.9.5
+Tested up to: 3.9
+Stable tag: 1.0.0
 License: Ultralink License
 License URI: https://ultralink.me/w/license.txt
 
@@ -47,19 +47,17 @@ An 'Ultralink' menu will be added to the sidebar through which you can configure
 
 == Changelog ==
 
-Category-based whitelisting and blacklisting.
-Added new ESPN link type.
-Added new CrunchBase link type.
-Added new Vimeo link type.
-Newly fleshed out AngelList inline pane.
-Added a "More..." button to the Wikipedia inline pane.
-More scaleable infrastructure. 
+Added new PDF link type.
+Added new Intel ARK link type.
+Added new ComicVine link type.
+Layout and alignment improvements.
 Tons of bug fixes. 
+Tons of stability and compatibility improvements. 
 Tons of performance enhancements.
 
 == Upgrade Notice ==
 
-No known upgrading issues.
+You may need to manually deactivate and then reactivate the plugin after upgrading to a new version.
 
 == Screenshots ==
 

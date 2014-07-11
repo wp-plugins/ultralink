@@ -1,6 +1,7 @@
 var linkDetectors = {
     "(\.png|\.jpeg|\.jpg|\.gif|\.tiff|\.svg|\.bmp)$":                'image',
     "http.*gravatar\\.com/avatar/":                                  'image',
+    "(\.pdf)$":                                                      'pdf',
     "http.*wikipedia\\.org/wiki/(?!(User|Wikipedia|File|MediaWiki|Template|Help|Category|Portal|Book|Education_Program|TimedText)(_talk)?:)": 'wikipedia',
     "http.*freebase\\.com":                                          'freebase',
     "http.*angel\\.co":                                              'angellist',
@@ -26,7 +27,10 @@ var linkDetectors = {
     "http.*github\\.com":                                            'github',
     "http.*google\\.com/search\?":                                   'searchgoogle',
     "http.*search\\.yahoo\\.com/search\?":                           'searchyahoo',
-    "http.*bing\\.com/search\?":                                     'searchbing'
+    "http.*bing\\.com/search\?":                                     'searchbing',
+    "http.*ark\\.intel\\.com/products\/":                            'intelark',
+    "http.*comicvine\\.com\/":                                       'comicvine',
+    "http.*webmd\\.com\/":                                           'webmd'
 };
 
 function linkType( url )

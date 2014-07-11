@@ -3,7 +3,7 @@
 Plugin Name: Ultralink
 Plugin URI: https://ultralink.me
 Description: The Hyperlink, 2.0. Add rich context to your writing, create a better experience for your readers and make more revenue doing it.
-Version: 0.9.5
+Version: 1.0.0
 Author: Ultralink Inc.
 Author URI: http://ultralink.me
 License: Ultralink License
@@ -13,7 +13,7 @@ License URI: https://ultralink.me/w/license.txt
 //require_once('ultralink-actions.php'); //*
 require_once('headers/globals.php'); //*
 
-global $ultralink_db_version;     $ultralink_db_version = "0.9.5";
+global $ultralink_db_version;     $ultralink_db_version = "1.0.0";
 
 global $calloutType;              $calloutType = 'none';
 global $previewRebuild;           $previewRebuild = 'no';
@@ -439,8 +439,8 @@ class Ultralink
 
         Ultralink::makeTables( $wpdb->prefix );
         
-        add_option("ultralink_db_version", $ultralink_db_version);
-        
+        update_option("ultralink_db_version", $ultralink_db_version);
+
 //        wp_schedule_event(current_time('timestamp'), 'daily', 'ultralink_clean_content_cache'); //*
 //        wp_schedule_event(current_time('timestamp'), 'hourly', 'ultralink_check_updates');
 //        wp_schedule_event(current_time('timestamp'), 'twicedaily', 'ultralink_me_sync');
@@ -526,6 +526,15 @@ add_action( 'network_admin_menu',                 array('Ultralink', 'network_ul
 //add_action( 'ultralink_me_sync_process',          array('Ultralink', 'ultralinkMeSyncProcess')             );
 //add_action( 'ultralink_me_complete_sync',         array('Ultralink', 'ultralinkMeCompleteSync')            );
 //add_action( 'ultralink_me_complete_sync_process', array('Ultralink', 'ultralinkMeSyncProcess')             );
+
+function update_db_check()
+{
+    global $ultralink_db_version;
+
+    if( get_site_option( 'ultralink_db_version' ) != $ultralink_db_version ){ ultralink_activate(); }
+}
+
+add_action( 'plugins_loaded', 'update_db_check' );
 
 register_activation_hook( __FILE__,               array('Ultralink', 'ultralink_activation')               );
 register_deactivation_hook( __FILE__,             array('Ultralink', 'ultralink_deactivation')             );
