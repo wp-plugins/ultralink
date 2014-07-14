@@ -3,7 +3,7 @@
 Plugin Name: Ultralink
 Plugin URI: https://ultralink.me
 Description: The Hyperlink, 2.0. Add rich context to your writing, create a better experience for your readers and make more revenue doing it.
-Version: 1.0.0
+Version: 1.0.0.1
 Author: Ultralink Inc.
 Author URI: http://ultralink.me
 License: Ultralink License
@@ -531,7 +531,7 @@ function update_db_check()
 {
     global $ultralink_db_version;
 
-    if( get_site_option( 'ultralink_db_version' ) != $ultralink_db_version ){ ultralink_activate(); }
+    if( get_site_option( 'ultralink_db_version' ) != $ultralink_db_version ){ Ultralink::ultralink_activate(); }
 }
 
 add_action( 'plugins_loaded', 'update_db_check' );

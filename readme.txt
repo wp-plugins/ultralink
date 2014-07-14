@@ -3,8 +3,8 @@ Contributors: spencer@ultralink.me
 Donate link: https://ultralink.me
 Tags: links, hyperlink, context, rich, affiliate, referral, popup
 Requires at least: 3.0
-Tested up to: 3.9
-Stable tag: 1.0.0
+Tested up to: 3.9.1
+Stable tag: 1.0.0.1
 License: Ultralink License
 License URI: https://ultralink.me/w/license.txt
 
