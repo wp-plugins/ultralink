@@ -5,7 +5,7 @@ var linkDetectors = {
     "http.*wikipedia\\.org/wiki/(?!(User|Wikipedia|File|MediaWiki|Template|Help|Category|Portal|Book|Education_Program|TimedText)(_talk)?:)": 'wikipedia',
     "http.*freebase\\.com":                                          'freebase',
     "http.*angel\\.co":                                              'angellist',
-    "http.*crunchbase\\.com/(company|person)":                       'crunchbase',
+    "http.*crunchbase\\.com/(company|person|organization)":          'crunchbase',
     "http.*ultralink\\.me/annotation/":                              'annotation',
     "http.*www\\.amazon\\.(br|ca|com|co\.uk|cn|de|es|fr|in|it|jp)/": 'buyamazon',
     "http.*ebay\.com":                                               'buyebay',
@@ -30,7 +30,8 @@ var linkDetectors = {
     "http.*bing\\.com/search\?":                                     'searchbing',
     "http.*ark\\.intel\\.com/products\/":                            'intelark',
     "http.*comicvine\\.com\/":                                       'comicvine',
-    "http.*webmd\\.com\/":                                           'webmd'
+    "http.*webmd\\.com\/":                                           'webmd',
+    "xmpp:.*":                                                       'xmpp'
 };
 
 function linkType( url )

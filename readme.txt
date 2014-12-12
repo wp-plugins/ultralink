@@ -3,8 +3,8 @@ Contributors: spencer@ultralink.me
 Donate link: https://ultralink.me
 Tags: links, hyperlink, context, rich, affiliate, referral, popup
 Requires at least: 3.0
-Tested up to: 3.9.1
-Stable tag: 1.0.0.1
+Tested up to: 4.0.1
+Stable tag: 1.0.1
 License: Ultralink License
 License URI: https://ultralink.me/w/license.txt
 
@@ -47,9 +47,8 @@ An 'Ultralink' menu will be added to the sidebar through which you can configure
 
 == Changelog ==
 
-Added new PDF link type.
-Added new Intel ARK link type.
-Added new ComicVine link type.
+Added new XMPP/Jabber link type.
+Added new VLC link type.
 Layout and alignment improvements.
 Tons of bug fixes. 
 Tons of stability and compatibility improvements. 

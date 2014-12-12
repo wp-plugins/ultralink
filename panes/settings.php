@@ -440,7 +440,7 @@
     <div>
 		<br>
 		<div class="settingSection">
-            <h2 style="margin-top: 4px;">Ultralink WordPress Plugin Beta Version <?php global $ultralink_version_string; echo $ultralink_version_string; ?></h2>
+            <h2 style="margin-top: 4px;">Ultralink WordPress Plugin Version <?php global $ultralink_version_string; echo $ultralink_version_string; ?></h2>
             <div style='display: none;'>
                 <?php
                     global $ultralink_version;
@@ -556,7 +556,7 @@
 
                 <div id="ultralinkmeSourceSettings" style='<?php if( $ultralinkEnabled != "checked"){ echo "display: none"; } ?>'>
                     <h2 style="margin-top: 10px;">ultralink.me</h2>
-                    <div id="ultralinkmeDatabaseDiv" style='<?php if( !empty($source) && ($source != "ultralink.me") ){ echo "display: none"; } ?>'><div id="ultralinkmeDatabaseInfo">To create and manage your own seperate ultralink database, create an account at ultralink.me. Once you have created your own <b>Hosted Database</b>, you can enter it's name below to maintain complete control over the ultralinks on your site. The <a href="https://ultralink.me/w/umdatabase.html" target="_blank">central ultralink.me database</a> is used by default.</div><a href='https://ultralink.me/dashboard' target='_blank'><input type="button" value='ultralink.me Dashboard' /></a></div>
+                    <div id="ultralinkmeDatabaseDiv" style='<?php if( !empty($source) && ($source != "ultralink.me") ){ echo "display: none"; } ?>'><div id="ultralinkmeDatabaseInfo">To create and manage your own seperate ultralink database, create an account at ultralink.me. Once you have created your own <b>Hosted Database</b>, you can enter it's name below to maintain complete control over the ultralinks on your site. The <a href="https://ultralink.me/w/umdatabase.html" target="_blank">Mainline Database</a> is used by default.</div><a href='https://ultralink.me/dashboard' target='_blank'><input type="button" value='ultralink.me Dashboard' /></a></div>
                     <table>
                     <tr><td>Database: </td><td><input id='ultralink_source' size='20' type='text' value='<?php echo $source; ?>' onblur='enteredDatabase()' onkeydown='if( event.keyCode == 13 ){ jQuery("#ultralink_source").blur(); }' /></td></tr>
                     </table>

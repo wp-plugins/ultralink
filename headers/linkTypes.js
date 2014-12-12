@@ -8,6 +8,7 @@ var linkTypes = {
     'video':             "Video",
     'videoyoutube':      "YouTube",
     'videovimeo':        "Vimeo",
+    'videovlc':          "VLC",
     'buylinkshareapple': "Buy From Apple",
     'buyapple':          "Buy From Apple",
     'buyamazon':         "Buy From Amazon",
@@ -36,6 +37,7 @@ var linkTypes = {
     'annotation':        "Annotation",
     'map':               "Map",
     'mapgoogle':         "Google Map",
+    'xmpp':              "Jabber",
     'search':            "Search",
     'searchgoogle':      "Google Search",
     'searchyahoo':       "Yahoo Search",
@@ -51,8 +53,9 @@ var linkTypeCategories = {
     'Buy':        [ "buy", "buylinkshareapple", "buyapple", "buyamazon", "buyebay" ],
     'Social':     [ "twitter", "linkedin", "googleplus", "facebook" ],
     'Reference':  [ "wikipedia", "mediawiki", "imdb", "espn", "webmd", "github", "freebase", "angellist", "crunchbase", "manpage", "map", "mapgoogle", "intelark", "comicvine" ],
-    'Video':      [ "video", "videoyoutube", "videovimeo" ],
+    'Video':      [ "video", "videoyoutube", "videovimeo", "videovlc" ],
     'Annotation': [ "annotation" ],
+    'Chat':       [ "xmpp" ],
     'Search':     [ "searchul", "search", "searchgoogle", "searchyahoo", "searchbing", "searchpubmed" ]
 };
 

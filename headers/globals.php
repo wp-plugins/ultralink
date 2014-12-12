@@ -7,7 +7,7 @@
 
     $APIversion = "https://ultralink.me/API/current/";
         
-    $ultralink_version = "36";
-    $ultralink_version_string = "1.0.0";
+    $ultralink_version = "37";
+    $ultralink_version_string = "1.0.1";
     
 ?>
