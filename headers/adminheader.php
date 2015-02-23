@@ -11,8 +11,18 @@
     global $dbPrefix;
 
     $dbPrefix = $wpdb->prefix;
-    if( !empty($networkAdmin) ){ $dbPrefix = "wp_ms_"; }
-    else if( $wpdb->get_var( "SELECT useMultisiteDatabase FROM `" . $wpdb->prefix . "ultralink_config`" ) == '1' ){ $dbPrefix = "wp_ms_"; $useMultisiteDatabase = "checked"; }
+    if( !empty($networkAdmin) && ($networkAdmin == 'true') ){ $dbPrefix = "wp_ms_"; }
+    else
+    {
+        $networkAdmin = 'false';
+    
+        $wpdb->query( "SHOW tables LIKE '" . $wpdb->prefix . "ultralink_config'" );
+
+        if( $wpdb->num_rows > 0 )
+        {
+            if( $wpdb->get_var( "SELECT useMultisiteDatabase FROM `" . $wpdb->prefix . "ultralink_config`" ) == '1' ){ $dbPrefix = "wp_ms_"; $useMultisiteDatabase = "checked"; }
+        }
+    }
 
     function typeOptions($selectedOption)
     {
@@ -71,16 +81,28 @@
 			return date('F Y', $ts);
 		}
 	}
-    
-//    $options = $wpdb->get_row("SELECT ultralinkEnabled, alwaysSearch, defaultSearch, useMultisiteDatabase, amazonAffiliateTag, linkshareID, ebayPublisherID, ultralinkEnabled, ultralinkMeEmail, ultralinkMeAPIKey, ultralinkMeWebsiteVerifier, UNIX_TIMESTAMP(ultralinkMeLastSync) AS ultralinkMeLastSync, mergeUltralinkMeLinks, ultralinkMeAnalytics, latestAvailableVersion, latestAvailableVersionString FROM " . $dbPrefix . "ultralink_config");
-    $options = $wpdb->get_row("SELECT ultralinkEnabled, alwaysSearch, combineSimilarButtons, multipleSearchOptions, linksMakeNewWindows, mouseProximityFade, hasHoverTime, hasPopupRecoveryTime, hoverTime, popupRecoveryTime, defaultSearch, useMultisiteDatabase, amazonAffiliateTag, linkshareID, ebayCampaign, ultralinkEnabled, ultralinkMeEmail, ultralinkMeAPIKey, ultralinkMeWebsiteVerifier, UNIX_TIMESTAMP(ultralinkMeLastSync) AS ultralinkMeLastSync, mergeUltralinkMeLinks, ultralinkMeAnalytics, latestAvailableVersion, latestAvailableVersionString, sourceType, source FROM " . $dbPrefix . "ultralink_config");
+
+    $categoryWhitelist = "";
+    $categoryWhitelistResult = $wpdb->get_results("SELECT * FROM " . $dbPrefix . "ultralink_category_whitelist", ARRAY_A);
+    foreach( $categoryWhitelistResult as $categoryWhitelistEntry )
+    {
+        $categoryWhitelist .= $categoryWhitelistEntry['whitestring'] . "\n";
+    }
+
+    $categoryBlacklist = "";
+    $categoryBlacklistResult = $wpdb->get_results("SELECT * FROM " . $dbPrefix . "ultralink_category_blacklist", ARRAY_A);
+    foreach( $categoryBlacklistResult as $categoryBlacklistEntry )
+    {
+        $categoryBlacklist .= $categoryBlacklistEntry['blackstring'] . "\n";
+    }
+
+    $options = $wpdb->get_row("SELECT *, UNIX_TIMESTAMP(ultralinkMeLastSync) AS ultralinkMeLastSync FROM " . $dbPrefix . "ultralink_config");
     if( is_null($options) )
     {
         if( $wpdb->get_var("SELECT COUNT(*) FROM " . $dbPrefix . "ultralink_config") == 0 )
         {
             $wpdb->query("INSERT INTO " . $dbPrefix . "ultralink_config (defaultSearch) VALUES('google')");
-    //        $options = $wpdb->get_row("SELECT ultralinkEnabled, alwaysSearch, defaultSearch, useMultisiteDatabase, amazonAffiliateTag, linkshareID, ebayPublisherID, ultralinkEnabled, ultralinkMeEmail, ultralinkMeAPIKey, ultralinkMeWebsiteVerifier, UNIX_TIMESTAMP(ultralinkMeLastSync) AS ultralinkMeLastSync, mergeUltralinkMeLinks, ultralinkMeAnalytics, latestAvailableVersion, latestAvailableVersionString FROM " . $dbPrefix . "ultralink_config");
-            $options = $wpdb->get_row("SELECT ultralinkEnabled, alwaysSearch, combineSimilarButtons, multipleSearchOptions, linksMakeNewWindows, mouseProximityFade, hasHoverTime, hasPopupRecoveryTime, hoverTime, popupRecoveryTime, defaultSearch, useMultisiteDatabase, amazonAffiliateTag, linkshareID, ebayCampaign, ultralinkEnabled, ultralinkMeEmail, ultralinkMeAPIKey, ultralinkMeWebsiteVerifier, UNIX_TIMESTAMP(ultralinkMeLastSync) AS ultralinkMeLastSync, mergeUltralinkMeLinks, ultralinkMeAnalytics, latestAvailableVersion, latestAvailableVersionString, sourceType, source FROM " . $dbPrefix . "ultralink_config");
+            $options = $wpdb->get_row("SELECT *, UNIX_TIMESTAMP(ultralinkMeLastSync) AS ultralinkMeLastSync FROM " . $dbPrefix . "ultralink_config");
         }
     }
     
@@ -113,7 +135,7 @@
 
     $amazonAffiliateTag = $options->amazonAffiliateTag;
     $linkshareID        = $options->linkshareID;
-//    $ebayPublisherID    = $options->ebayPublisherID;
+    $phgID              = $options->phgID;
     $ebayCampaign       = $options->ebayCampaign;
     
     $ultralinkMeEmail = $options->ultralinkMeEmail;
@@ -134,9 +156,9 @@
 <script type="text/javascript">
 
     var amazonAffiliateTag = '<?php echo $amazonAffiliateTag; ?>';
-    var linkshareID = '<?php echo $linkshareID; ?>';
-//    var ebayPublisherID = '<?php echo $ebayPublisherID; ?>';
-    var ebayCampaign = '<?php echo $ebayCampaign; ?>';
+    var linkshareID        = '<?php echo $linkshareID; ?>';
+    var phgID              = '<?php echo $phgID; ?>';
+    var ebayCampaign       = '<?php echo $ebayCampaign; ?>';
     
     var ultralinkMeEmail = '<?php echo $ultralinkMeEmail; ?>';
     var ultralinkMeAPIKey = '<?php echo $ultralinkMeAPIKey; ?>';
@@ -214,6 +236,11 @@
                 if( baseURL.match("?") ){ baseURL += "&patnerId=30"; }else{ baseURL += "?partnerId=30"; }
                 baseURL = encodeURIComponent(encodeURIComponent(baseURL));
                 baseURL = linkshareURL + baseURL;
+            } break;
+
+            case 'buyapple':
+            {
+                if( phgID ){ return baseURL + "&at=" + phgID; }else{ return baseURL; }
             } break;
             
             case 'buyebay':
