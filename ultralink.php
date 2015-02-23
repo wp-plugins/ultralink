@@ -3,7 +3,7 @@
 Plugin Name: Ultralink
 Plugin URI: https://ultralink.me
 Description: The Hyperlink, 2.0. Add rich context to your writing, create a better experience for your readers and make more revenue doing it.
-Version: 1.0.1
+Version: 1.0.2
 Author: Ultralink Inc.
 Author URI: http://ultralink.me
 License: Ultralink License
@@ -13,7 +13,7 @@ License URI: https://ultralink.me/w/license.txt
 //require_once('ultralink-actions.php'); //*
 require_once('headers/globals.php'); //*
 
-global $ultralink_db_version;     $ultralink_db_version = "1.0.1";
+global $ultralink_db_version;     $ultralink_db_version = "1.0.2";
 
 global $calloutType;              $calloutType = 'none';
 global $previewRebuild;           $previewRebuild = 'no';
@@ -144,7 +144,7 @@ class Ultralink
 
             $imagesURL = plugin_dir_url( __FILE__ ) . "ultralinkImages/";
             
-            echo "<script type='text/javascript'>Ultralink.startUltralink( { $databaseOption 'environment':'wordpress', 'scanFirst':'$scanFirst', 'sectionSelector':'div.entry-content, div.entry_content, div.post-entry', 'associatedWebsite':'" . site_url() .  "', 'combineLikeButtons':'$combineSimilarButtons', 'seperateSearch':'$multipleSearchOptions', 'newWindows':'$linksMakeNewWindows', 'proximityFade':'$mouseProximityFade', 'hoverTime':'$hoverTime', 'hoverRecoverTime':'$popupRecoveryTime', 'addSearch':'$addSearch', 'searchURL':'$searchURL', 'imagesURL':'$imagesURL', 'inlinePopups':'true', 'UMAnalytics':'$UMAnalytics'$adminOptions, 'iconSide' : 'right', 'buyamazon_affiliateInfo' : '$amazonAffiliateTag', 'buylinkshareapple_affiliateInfo' : '$linkshareID', 'buyapple_affiliateInfo' : '$phgID', 'buyebay_affiliateInfo' : '$ebayCampaign', 'categoryWhitelist': " . json_encode($categoryWhitelist) . ", 'categoryBlacklist': " . json_encode($categoryBlacklist) . "  } );</script>";
+            echo "<script type='text/javascript'>Ultralink.startUltralink( { $databaseOption 'environment':'wordpress', 'scanFirst':'$scanFirst', 'sectionSelector':'div.entry-content, div.entry_content, div.post-entry', 'combineLikeButtons':'$combineSimilarButtons', 'seperateSearch':'$multipleSearchOptions', 'newWindows':'$linksMakeNewWindows', 'proximityFade':'$mouseProximityFade', 'hoverTime':'$hoverTime', 'hoverRecoverTime':'$popupRecoveryTime', 'addSearch':'$addSearch', 'searchURL':'$searchURL', 'imagesURL':'$imagesURL', 'inlinePopups':'true', 'UMAnalytics':'$UMAnalytics'$adminOptions, 'iconSide' : 'right', 'buyamazon_affiliateInfo' : '$amazonAffiliateTag', 'buylinkshareapple_affiliateInfo' : '$linkshareID', 'buyapple_affiliateInfo' : '$phgID', 'buyebay_affiliateInfo' : '$ebayCampaign', 'categoryWhitelist': " . json_encode($categoryWhitelist) . ", 'categoryBlacklist': " . json_encode($categoryBlacklist) . "  } );</script>";
         }        
 	}
 

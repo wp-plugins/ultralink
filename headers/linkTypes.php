@@ -38,7 +38,7 @@
                         "annotation"        => "Annotation",
                         "map"               => "Map",
                         "mapgoogle"         => "Google Map",
-                        "xmpp"              => "Chat",
+                        "xmpp"              => "Jabber",
                         "search"            => "Search",
                         "searchgoogle"      => "Google Search",
                         "searchyahoo"       => "Yahoo Search",
